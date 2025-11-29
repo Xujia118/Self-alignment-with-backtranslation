@@ -88,11 +88,11 @@ def train_model():
         output_dir=config.CHECKPOINT_DIR,
         save_strategy="steps",
         save_steps=config.SAVE_STEPS,
-        save_total_limit=3,             # Keep last 3 checkpoints
+        save_total_limit=2,             # Keep last 2 checkpoints
 
         push_to_hub=True,
         hub_model_id=config.NEW_MODEL_ID,
-        hub_strategy="every_save", 
+        hub_strategy="checkpoint", 
 
         eval_strategy="steps",
         eval_steps=config.EVAL_STEPS,
@@ -113,5 +113,6 @@ def train_model():
     )
 
     # 8️⃣ Train
-    trainer.train(resume_from_checkpoint=True)
+    trainer.train(resume_from_checkpoint="last_checkpoint")
     trainer.push_to_hub(commit_message="Trained backwards model")
+

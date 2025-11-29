@@ -3,7 +3,7 @@ NEW_MODEL_ID = "backwards-llama2-7b-guanaco"
 DATASET_ID = "timdettmers/openassistant-guanaco"
 HF_DATASET_REPO = "xujia118/guanaco"
 
-CHECKPOINT_DIR="checkpoint"
+CHECKPOINT_DIR="./checkpoints"
 
 # Training parameters
 TRAIN_BATCH_SIZE = 1
