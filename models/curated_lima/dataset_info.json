@@ -1,0 +1,46 @@
+{
+  "builder_name": "parquet",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "lima-single-turn",
+  "dataset_size": 2803583,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/xujia118/lima-single-turn@279266fc89b3ab5a4db10cfbcb53d8d9fafca297/data/train-00000-of-00001.parquet": {
+      "num_bytes": 1617303,
+      "checksum": null
+    }
+  },
+  "download_size": 1617303,
+  "features": {
+    "instruction": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "output": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "generated_instruction": {
+      "dtype": "string",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 4420886,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 2803583,
+      "num_examples": 1000,
+      "dataset_name": "lima-single-turn"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}

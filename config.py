@@ -1,9 +1,12 @@
 BASE_MODEL_ID = "meta-llama/Llama-2-7b-hf"
-NEW_MODEL_ID = "backwards-llama2-7b-guanaco"
+ADAPTER_ID = "xujia118/backwards-llama2-7b-guanaco"
 DATASET_ID = "timdettmers/openassistant-guanaco"
+
 HF_DATASET_REPO = "xujia118/guanaco"
+HF_DATASET_LIMA_SINGLE_TURN = "xujia118/lima-single-turn"
 
 CHECKPOINT_DIR="./checkpoints"
+BATCH_SIZE=10
 
 # Training parameters
 TRAIN_BATCH_SIZE = 1
