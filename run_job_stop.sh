@@ -2,10 +2,12 @@
 set -euo pipefail
 
 USERNAME="ubuntu"
-PROJECT_FOLDER="Self-alignment-with-backtranslation"
 SCRIPT_PATH="scripts.01_generate_instruction"
 
-cd /home/"$USERNAME"/"$PROJECT_FOLDER"
+python3 -m venv venv
+source venv/bin/activate
+echo "Virtual environment activated"
+pip install -r requirements.txt
 
 # Run the training script
 echo "Starting training script..."
