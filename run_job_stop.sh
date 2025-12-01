@@ -8,13 +8,8 @@ SCRIPT_PATH="scripts.01_generate_instruction"
 export HF_HOME="/workspace/huggingface"
 mkdir -p "$HF_HOME"
 
-# Create a symlink for HF cache to ensure nothing writes to container disk
-mkdir -p /runpod-volume/hfcache
-rm -rf ~/.cache/huggingface || true
-ln -s /runpod-volume/hfcache ~/.cache/huggingface
-
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv /workspace/venv
+source /workspace/venv/bin/activate
 echo "Virtual environment activated"
 
 pip install -r requirements.txt
