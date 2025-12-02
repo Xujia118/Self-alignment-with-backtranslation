@@ -4,9 +4,9 @@ from peft import PeftModel, PeftConfig
 import config
 
 
-def setup_llm_for_task(base_model_id: str, adapter_model_id: str, is_training: bool=False):
+def setup_llm_for_task(base_model_id: str, adapter_model_id: str | None = None, is_training: bool=False):
     """
-    Sets up the base model and loads the LoRA adapter for a specified task (training or inference).
+    Sets up the base model and optionally loads the LoRA adapter for a specified task (training or inference).
 
     Args:
         base_model_id (str): The identifier for the base LLM (e.g., 'meta-llama/Llama-2-7b-hf').
@@ -18,7 +18,7 @@ def setup_llm_for_task(base_model_id: str, adapter_model_id: str, is_training: b
     """
     # 1. Base Model Loading
     print(f"Loading base model: {base_model_id}...")
-    base_model = AutoModelForCausalLM.from_pretrained(
+    model = AutoModelForCausalLM.from_pretrained(
         base_model_id,
         device_map="auto",
         dtype=torch.bfloat16
@@ -38,26 +38,27 @@ def setup_llm_for_task(base_model_id: str, adapter_model_id: str, is_training: b
             tokenizer.padding_side = "left"  # Recommended for generation efficiency
 
     # 3. LoRA Adapter Loading
-    print(f"Loading adapter: {adapter_model_id}...")
+    if adapter_model_id:
+        print(f"Loading adapter: {adapter_model_id}...")
 
-    # Define key_mapping if needed (though often unnecessary with standard PEFT saving)
-    # Using your original mapping as an example:
-    key_mapping = {
-        'base_model.model.model.model.model': '',
-    }
+        # Define key_mapping if needed (though often unnecessary with standard PEFT saving)
+        # Using your original mapping as an example:
+        key_mapping = {
+            'base_model.model.model.model.model': '',
+        }
 
-    model_with_adapter = PeftModel.from_pretrained(
-        base_model,
-        adapter_model_id,
-        key_mapping=key_mapping
-    )
+        model = PeftModel.from_pretrained(
+            model,
+            adapter_model_id,
+            # key_mapping=key_mapping # usually we don't need it
+        )
 
     # 4. Set Model State
     if is_training:
-        model_with_adapter.train()
+        model.train()
         print("Model set to **TRAIN** mode.")
     else:
-        model_with_adapter.eval()
+        model.eval()
         print("Model set to **EVAL** mode.")
 
-    return model_with_adapter, tokenizer
+    return model, tokenizer

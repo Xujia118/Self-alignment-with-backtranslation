@@ -1,9 +1,11 @@
 BASE_MODEL_ID = "meta-llama/Llama-2-7b-hf"
+JUDGE_MODEL_DI = "meta-llama/Llama-3.2-3B-Instruct"
 ADAPTER_ID = "xujia118/backwards-llama2-7b-guanaco"
 DATASET_ID = "timdettmers/openassistant-guanaco"
 
 HF_DATASET_REPO = "xujia118/guanaco"
 HF_DATASET_LIMA_SINGLE_TURN = "xujia118/lima-single-turn"
+HF_CURATED_LIMA_V3 = "xujia118/curated_lima_v3"
 
 CHECKPOINT_DIR="./checkpoints"
 BATCH_SIZE=10

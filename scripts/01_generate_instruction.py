@@ -17,13 +17,6 @@ from . import utils
 import config
 
 
-# --- Configuration (These should be defined or loaded from a config file) ---
-# Replace these with your actual model paths
-BASE_MODEL_ID = "base/model/path"
-ADAPTER_MODEL_ID = "lora/adapter/path"
-DATA_FILE_PATH = "data/responses.json"  # Path to your source data file
-
-
 # --- Utility Functions for Prompt Formatting and Cleaning ---
 
 def format_prompt(response_text: str) -> str:
@@ -58,8 +51,7 @@ def process_generated_text(prompt: str, full_text: str) -> str:
 # --- Model Setup Logic (Reusing the pattern we discussed) ---
 
 def setup_model(base_id: str, adapter_id: str):
-    model, tokenizer = utils.setup_llm_for_task(
-        config.BASE_MODEL_ID, config.ADAPTER_ID, is_training=True)
+    model, tokenizer = utils.setup_llm_for_task(base_id, adapter_id, is_training=True)
 
     # 4. Create Pipeline Generator
     generator = pipeline(
@@ -120,8 +112,6 @@ def generate_instructions_in_batches(dataset: Dataset, generator) -> list:
 
 if __name__ == "__main__":
     dataset = load_dataset(config.HF_DATASET_LIMA_SINGLE_TURN, split="train")
-    dataset = dataset.select(range(10))
-
     generator = setup_model(config.BASE_MODEL_ID, config.ADAPTER_ID)
 
     print("Starting instruction generation...")
