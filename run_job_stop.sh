@@ -2,7 +2,7 @@
 set -euo pipefail
 
 USERNAME="ubuntu"
-SCRIPT_PATH="scripts.01_generate_instruction"
+SCRIPT_PATH="scripts.03_fine_tune_backward_model"
 
 # Set HuggingFace cache directory to persistent volume
 export HF_HOME="/workspace/huggingface"

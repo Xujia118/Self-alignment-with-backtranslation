@@ -4,7 +4,12 @@ from peft import PeftModel, PeftConfig
 import config
 
 
-def setup_llm_for_task(base_model_id: str, adapter_model_id: str | None = None, is_training: bool=False):
+def setup_llm_for_task(
+        base_model_id: str, 
+        adapter_model_id: str | None = None, 
+        is_training: bool=False,
+        quantization_config=None
+    ):
     """
     Sets up the base model and optionally loads the LoRA adapter for a specified task (training or inference).
 
@@ -18,10 +23,18 @@ def setup_llm_for_task(base_model_id: str, adapter_model_id: str | None = None, 
     """
     # 1. Base Model Loading
     print(f"Loading base model: {base_model_id}...")
+    '''
+    dtype is applied at model load time, before quantization or anything else.
+    It sets the precision of the actual weights stored in memory.
+
+    But if you quantize, then the compute type is decided by the quantization config,
+    not the dtype.
+    '''
     model = AutoModelForCausalLM.from_pretrained(
         base_model_id,
         device_map="auto",
-        dtype=torch.bfloat16
+        dtype=torch.bfloat16 if quantization_config is None else None,
+        quantization_config=quantization_config
     )
 
     # 2. Tokenizer Loading

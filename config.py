@@ -6,6 +6,7 @@ DATASET_ID = "timdettmers/openassistant-guanaco"
 HF_DATASET_REPO = "xujia118/guanaco"
 HF_DATASET_LIMA_SINGLE_TURN = "xujia118/lima-single-turn"
 HF_CURATED_LIMA_V3 = "xujia118/curated_lima_v3"
+HF_LIMA_BEST_SAMPLES = "xujia118/self_curated_lima_v2"
 
 CHECKPOINT_DIR="./checkpoints"
 BATCH_SIZE=10
