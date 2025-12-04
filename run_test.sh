@@ -8,17 +8,14 @@ SCRIPT_PATH="scripts.03_fine_tune_backward_model"
 export HF_HOME="/workspace/huggingface"
 mkdir -p "$HF_HOME"
 
-python3 -m venv /workspace/venv
-source /workspace/venv/bin/activate
+python3 -m venv venv
+source /venv/bin/activate
 echo "Virtual environment activated"
 
 pip install -r requirements.txt
 
 # Run the training script
-echo "Starting training script..."
+echo "Starting testing..."
 python3 -m "$SCRIPT_PATH"
 EXIT_CODE=$?
 echo "Training script finished with exit code: $EXIT_CODE"
-
-echo "Shutting down instance..."
-sudo shutdown -h now

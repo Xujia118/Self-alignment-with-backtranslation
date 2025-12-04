@@ -1,6 +1,6 @@
 import torch
 from datasets import load_dataset
-from transformers import BitsAndBytesConfig, Trainer, TrainingArguments, DataCollatorForLanguageModeling
+from transformers import BitsAndBytesConfig, Trainer, TrainingArguments, DataCollatorForSeq2Seq
 from peft import LoraConfig, PeftModel
 import config
 from . import utils
@@ -105,7 +105,11 @@ def build_trainer(model, tokenizer, train_ds, test_ds):
         report_to="wandb",
     )
 
-    data_collator = DataCollatorForLanguageModeling(tokenizer, mlm=False)
+    data_collator = DataCollatorForSeq2Seq(
+        tokenizer=tokenizer,
+        padding=True,
+        label_pad_token_id=-100
+        )
 
     return Trainer(
         model=model,
